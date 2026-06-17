@@ -509,6 +509,8 @@ a:hover { text-decoration: underline; }
   line-height: 1.7;
   margin-bottom: 16px;
   flex-grow: 1;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 /* タグバッジ */
@@ -625,9 +627,10 @@ a:hover { text-decoration: underline; }
 
 .rec-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .rec-icon-box {
@@ -658,6 +661,9 @@ a:hover { text-decoration: underline; }
   color: var(--color-text);
   line-height: 1.3;
   flex: 1;
+  min-width: 0;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .rec-category-badge {
@@ -670,6 +676,7 @@ a:hover { text-decoration: underline; }
   border-radius: 20px;
   white-space: nowrap;
   flex-shrink: 0;
+  align-self: flex-start;
 }
 
 .rec-description {
@@ -678,6 +685,8 @@ a:hover { text-decoration: underline; }
   line-height: 1.7;
   margin-bottom: 16px;
   flex-grow: 1;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .rec-link {

@@ -49,7 +49,7 @@ const APPS = [
     tags: ["Macアプリ"],
     status: "公開中",
     icon: "sidebar",
-    image: "",
+    image: "assets/taskbar-screenshot.png",
     links: [
       { label: "紹介・導入", url: "https://ryuiyamada.github.io/task-sidebar/", primary: true },
       { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
@@ -80,26 +80,24 @@ const APPS = [
  * category 例: "Chrome拡張機能" / "Macアプリ" / "Winアプリ" / "Webサービス"
  * ===================================================== */
 const RECOMMENDED = [
-  // サンプル。RECOMMENDED に追記/差し替えてください。
+  // ※ 差し替え可能
   {
-    name: "Notion Web Clipper",
+    name: "Easy Scraper",
     category: "Chrome拡張機能",
-    description: "閲覧中のWebページをワンクリックでNotionのデータベースへ保存。後で読む記事や参考サイトの収集に。",
-    url: "https://chrome.google.com/webstore/detail/notion-web-clipper/knheggckgoiihginacbkhaalnibhilkk"
+    description: "ウェブページ上の要素をワンクリックで指定するだけでデータ抽出できるノーコードスクレイピングツール。プログラミング不要・無料で、視覚的な操作で表やリストを取得できる。",
+    url: "https://easyscraper.com/"
   },
-  // サンプル。RECOMMENDED に追記/差し替えてください。
   {
-    name: "Raycast",
-    category: "Macアプリ",
-    description: "macOS向けランチャー。アプリ起動・検索・クリップボード履歴・カレンダー確認がキーボードだけで完結する。",
-    url: "https://www.raycast.com"
-  },
-  // サンプル。RECOMMENDED に追記/差し替えてください。
-  {
-    name: "uBlock Origin",
+    name: "crx-gcal-url-opener",
     category: "Chrome拡張機能",
-    description: "オープンソースの広告・トラッカーブロッカー。ページ読み込みが速くなり、余計な広告が消える。",
-    url: "https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm"
+    description: "Googleカレンダーの会議開始数分前に、登録されたMeet/Zoom/TeamsのURLを自動でブラウザに開く拡張機能。カレンダーを見張らずに済むため、会議の参加忘れと出遅れを確実に防げる。",
+    url: "https://chrome.google.com/webstore/detail/crx-gcal-url-opener/pjginhohpenlemfdcjbahjbhnpinfnlm?hl=ja"
+  },
+  {
+    name: "Gmail reverse conversation",
+    category: "Chrome拡張機能",
+    description: "Gmailのスレッドを新しい順に並べ替え、返信ボタンをメール先頭に移動させる拡張機能。長いスレッドでも最新メールがすぐ確認・返信でき、スクロール手間がゼロになる。",
+    url: "https://chrome.google.com/webstore/detail/gmail-reverse-conversatio/kfgepjmmgamniaefbjlbacahkjjnjoaa?hl=ja&gl=JP"
   },
 ];
 
