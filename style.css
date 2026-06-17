@@ -384,6 +384,25 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 6px 18px rgba(7, 51, 101, 0.14);
 }
 
+/* fullbleed バリアント（imageFull: true のカード用）
+   ─ 信号機バー・stageの余白なし
+   ─ 画像がcard-image-wrapを全面被覆
+   ─ 16:9サイズはcard-image-wrapのaspect-ratioで統一維持 */
+.card-image-wrap.is-full {
+  background: #000;  /* 読み込み前の暗色地（モック画像の端が黒いため統一） */
+  padding: 0;
+  flex-direction: row;
+}
+
+.card-image-full {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
 /* プレースホルダ（image未指定 or 読み込みエラー時） */
 .card-image-placeholder {
   width: 100%;

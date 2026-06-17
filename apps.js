@@ -50,6 +50,7 @@ const APPS = [
     status: "公開中",
     icon: "sidebar",
     image: "assets/taskbar-card.png",
+    imageFull: true,
     links: [
       { label: "紹介・導入", url: "https://ryuiyamada.github.io/task-sidebar/", primary: true },
       { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
@@ -335,38 +336,59 @@ function buildCard(app) {
 
   // ── 画像エリア（16:9 統一）
   const imageWrap = document.createElement('div');
-  imageWrap.className = 'card-image-wrap';
+  imageWrap.className = app.imageFull
+    ? 'card-image-wrap is-full'
+    : 'card-image-wrap';
 
-  // ウィンドウ風トップバー（信号機ドット3つ）
-  const winBar = document.createElement('div');
-  winBar.className = 'card-win-bar';
-  winBar.setAttribute('aria-hidden', 'true');
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('span');
-    dot.className = 'card-win-bar-dot';
-    winBar.appendChild(dot);
-  }
-  imageWrap.appendChild(winBar);
-
-  // 画像ステージ（淡色地＋余白でスクショが浮いて見える）
-  const stage = document.createElement('div');
-  stage.className = 'card-image-stage';
-
-  if (app.image) {
-    const img = document.createElement('img');
-    img.src = app.image;
-    img.alt = `${app.name} のスクリーンショット`;
-    img.loading = 'lazy';
-    // 読み込みエラー時はプレースホルダにフォールバック
-    img.onerror = function() {
-      stage.innerHTML = '';
-      stage.appendChild(buildImagePlaceholder());
-    };
-    stage.appendChild(img);
+  if (app.imageFull) {
+    // fullbleed: 信号機バー・ステージ余白なし。画像をwrap全面に表示
+    if (app.image) {
+      const img = document.createElement('img');
+      img.className = 'card-image-full';
+      img.src = app.image;
+      img.alt = `${app.name} のスクリーンショット`;
+      img.loading = 'lazy';
+      img.onerror = function() {
+        imageWrap.innerHTML = '';
+        imageWrap.appendChild(buildImagePlaceholder());
+      };
+      imageWrap.appendChild(img);
+    } else {
+      imageWrap.appendChild(buildImagePlaceholder());
+    }
   } else {
-    stage.appendChild(buildImagePlaceholder());
+    // 通常: ウィンドウ風トップバー（信号機ドット3つ）＋ステージ余白
+    const winBar = document.createElement('div');
+    winBar.className = 'card-win-bar';
+    winBar.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < 3; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'card-win-bar-dot';
+      winBar.appendChild(dot);
+    }
+    imageWrap.appendChild(winBar);
+
+    // 画像ステージ（淡色地＋余白でスクショが浮いて見える）
+    const stage = document.createElement('div');
+    stage.className = 'card-image-stage';
+
+    if (app.image) {
+      const img = document.createElement('img');
+      img.src = app.image;
+      img.alt = `${app.name} のスクリーンショット`;
+      img.loading = 'lazy';
+      // 読み込みエラー時はプレースホルダにフォールバック
+      img.onerror = function() {
+        stage.innerHTML = '';
+        stage.appendChild(buildImagePlaceholder());
+      };
+      stage.appendChild(img);
+    } else {
+      stage.appendChild(buildImagePlaceholder());
+    }
+    imageWrap.appendChild(stage);
   }
-  imageWrap.appendChild(stage);
+
   card.appendChild(imageWrap);
 
   // ── カード本文エリア
