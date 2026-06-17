@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryui's Apps — つくったものを、ここにまとめる。</title>
+  <meta name="description" content="日常の不満を解決するために自分で開発したChrome拡張・Mac/Winアプリなどを一覧化。">
+
+  <!-- Google Fonts: Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       ナビバー
+  ══════════════════════════════════════════════ -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <!-- ロゴ -->
+      <a href="#" class="nav-logo" aria-label="Ryui's Apps トップへ">
+        <!-- グリッド/アプリ系の線SVGアイコン -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        </svg>
+        <span>Ryui's Apps</span>
+      </a>
+
+      <!-- 右側ナビ -->
+      <nav class="nav-right" aria-label="サイトナビゲーション">
+        <a href="https://github.com/RYUIYAMADA" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHubプロフィール（新しいタブで開く）">
+          <!-- GitHub線アイコン -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ══════════════════════════════════════════════
+         ヒーロー
+    ══════════════════════════════════════════════ -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <!-- eyebrow バッジ -->
+        <div class="hero-eyebrow" aria-hidden="true">開発したツール・アプリ集</div>
+
+        <h1 id="hero-heading">
+          つくったものを、<em>ここにまとめる。</em>
+        </h1>
+
+        <p class="hero-lead">
+          日常の不満を解決するために自分で開発した Chrome拡張・Mac / Win アプリなどを一覧化。タグで絞り込めます。
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         タグフィルター + カードグリッド
+    ══════════════════════════════════════════════ -->
+    <section class="catalog" aria-label="アプリ一覧">
+      <div class="container">
+
+        <!-- タグフィルター -->
+        <div
+          id="filterBar"
+          class="filter-bar"
+          role="group"
+          aria-label="タグで絞り込む"
+        >
+          <!-- apps.js が動的に生成 -->
+        </div>
+
+        <!-- カードグリッド -->
+        <div
+          id="cardsGrid"
+          class="cards-grid"
+          role="list"
+          aria-label="アプリカード一覧"
+        >
+          <!-- apps.js が動的に生成 -->
+        </div>
+
+        <!-- 0件メッセージ -->
+        <p id="emptyMessage" class="empty-message" aria-live="polite">
+          該当するアプリがありません。
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════════════
+       フッター
+  ══════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <p>Ryui's Apps &copy; 2026 &nbsp;|&nbsp; <a href="https://github.com/RYUIYAMADA" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+  </footer>
+
+  <script src="apps.js"></script>
+</body>
+</html>
