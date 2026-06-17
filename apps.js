@@ -42,7 +42,8 @@ const APPS = [
     icon: "calendar",
     links: [
       { label: "紹介ページ", url: "https://ryuiyamada.github.io/yotei-tsuika-lp/", primary: true },
-      { label: "GitHub", url: "https://github.com/RYUIYAMADA/tasks-manager" }
+      { label: "導入手順", url: "https://github.com/RYUIYAMADA/yotei-tsuika#readme" },
+      { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
     ]
   },
 
