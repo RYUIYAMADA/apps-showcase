@@ -49,7 +49,7 @@ const APPS = [
     tags: ["Macアプリ"],
     status: "公開中",
     icon: "sidebar",
-    image: "assets/taskbar-screenshot.png",
+    image: "assets/taskbar-card.png",
     links: [
       { label: "紹介・導入", url: "https://ryuiyamada.github.io/task-sidebar/", primary: true },
       { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
