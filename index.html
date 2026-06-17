@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ryui's Apps — つくったものを、ここにまとめる。</title>
+  <title>Ryui's Apps — RYUI YAMADA</title>
   <meta name="description" content="日常の不満を解決するために自分で開発したChrome拡張・Mac/Winアプリなどを一覧化。">
 
   <!-- Google Fonts: Noto Sans JP -->
@@ -20,16 +20,19 @@
   ══════════════════════════════════════════════ -->
   <header class="nav" role="banner">
     <div class="nav-inner">
-      <!-- ロゴ -->
+      <!-- ロゴ：サイト名＋作者名 -->
       <a href="#" class="nav-logo" aria-label="Ryui's Apps トップへ">
         <!-- グリッド/アプリ系の線SVGアイコン -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
         </svg>
-        <span>Ryui's Apps</span>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Ryui's Apps</span>
+          <span class="nav-logo-author">RYUI YAMADA</span>
+        </div>
       </a>
 
       <!-- 右側ナビ -->
@@ -37,7 +40,7 @@
         <a href="https://github.com/RYUIYAMADA" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHubプロフィール（新しいタブで開く）">
           <!-- GitHub線アイコン -->
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span>GitHub</span>
         </a>
@@ -54,6 +57,9 @@
         <!-- eyebrow バッジ -->
         <div class="hero-eyebrow" aria-hidden="true">開発したツール・アプリ集</div>
 
+        <!-- 作者名（自然に添える） -->
+        <p class="hero-author">by RYUI YAMADA</p>
+
         <h1 id="hero-heading">
           つくったものを、<em>ここにまとめる。</em>
         </h1>
@@ -65,12 +71,17 @@
     </section>
 
     <!-- ══════════════════════════════════════════════
-         タグフィルター + カードグリッド
+         タグフィルター + 自作ツールカードグリッド
     ══════════════════════════════════════════════ -->
-    <section class="catalog" aria-label="アプリ一覧">
+    <section class="catalog" aria-label="自作ツール一覧">
       <div class="container">
 
-        <!-- タグフィルター -->
+        <!-- セクション見出し -->
+        <p class="section-label" aria-hidden="true">MY TOOLS</p>
+        <h2 class="section-title">自作ツール</h2>
+        <p class="section-sub">自分で開発した Chrome拡張・Mac / Win アプリなど</p>
+
+        <!-- タグフィルター（自作セクションのみに作用） -->
         <div
           id="filterBar"
           class="filter-bar"
@@ -85,7 +96,7 @@
           id="cardsGrid"
           class="cards-grid"
           role="list"
-          aria-label="アプリカード一覧"
+          aria-label="自作ツールカード一覧"
         >
           <!-- apps.js が動的に生成 -->
         </div>
@@ -97,13 +108,37 @@
 
       </div>
     </section>
+
+    <!-- ══════════════════════════════════════════════
+         おすすめツールセクション（他者製・常時表示）
+    ══════════════════════════════════════════════ -->
+    <section class="recommended" aria-label="おすすめツール">
+      <div class="container">
+
+        <!-- セクション見出し（section-label に Orange を使用: 2/2箇所） -->
+        <p class="section-label" aria-hidden="true">RECOMMENDED</p>
+        <h2 class="section-title">おすすめツール</h2>
+        <p class="section-sub">日々の作業を助けてくれる拡張機能・アプリ</p>
+
+        <!-- おすすめカードグリッド（タグフィルターの影響を受けない） -->
+        <div
+          id="recGrid"
+          class="rec-grid"
+          role="list"
+          aria-label="おすすめツールカード一覧"
+        >
+          <!-- apps.js が動的に生成 -->
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- ══════════════════════════════════════════════
        フッター
   ══════════════════════════════════════════════ -->
   <footer class="footer" role="contentinfo">
-    <p>Ryui's Apps &copy; 2026 &nbsp;|&nbsp; <a href="https://github.com/RYUIYAMADA" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    <p>Ryui's Apps &copy; 2026 &nbsp;|&nbsp; RYUI YAMADA &nbsp;|&nbsp; <a href="https://github.com/RYUIYAMADA" target="_blank" rel="noopener noreferrer">GitHub</a></p>
   </footer>
 
   <script src="apps.js"></script>

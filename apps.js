@@ -1,7 +1,7 @@
 /**
  * apps.js — Ryui's Apps Showcase
  * =====================================================
- * 【アプリを追加する方法】
+ * 【自作ツールを追加する方法】
  *
  *   1. 下の APPS 配列の末尾の } の後にカンマを付けて、
  *      新しい { ... } ブロックを追記するだけ。
@@ -14,20 +14,14 @@
  *      status      → "公開中" または "開発中"
  *      icon        → アイコンキー（下記 ICONS の中から選ぶ）
  *                    calendar / chrome / apple / windows / globe / code / image / terminal / default
- *      links       → リンクボタンの配列。primary:true が青ボタン、それ以外は枠だけボタン
+ *      image       → スクショ画像パス（例: "assets/yotei-tsuika.png"）
+ *                    16:9 横長推奨。省略するとプレースホルダ表示。
+ *      links       → リンクボタンの配列。primary:true が Navyボタン、それ以外は枠だけボタン
  *
- *   3. 例：
- *      {
- *        name: "my-tool",
- *        tagline: "ツールのキャッチコピー",
- *        description: "説明文をここに書く。",
- *        tags: ["Winアプリ", "生産性"],
- *        status: "開発中",
- *        icon: "windows",
- *        links: [
- *          { label: "GitHub", url: "https://github.com/RYUIYAMADA/my-tool" }
- *        ]
- *      }
+ *   3. スクショ追加方法：
+ *      assets/ フォルダにスクショ画像を置き、image フィールドにパスを書く。
+ *      例: image: "assets/my-tool-screenshot.png"
+ *      推奨サイズ: 1280×720 (16:9横長)
  * =====================================================
  */
 
@@ -40,8 +34,9 @@ const APPS = [
     tags: ["Chrome拡張機能", "macアプリ"],
     status: "公開中",
     icon: "calendar",
+    image: "assets/yotei-tsuika.png",
     links: [
-      { label: "紹介ページ", url: "https://ryuiyamada.github.io/yotei-tsuika-lp/", primary: true },
+      { label: "紹介ページ", url: "https://ryuiyamada.github.io/quick-calendar/", primary: true },
       { label: "導入手順", url: "https://github.com/RYUIYAMADA/yotei-tsuika#readme" },
       { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
     ]
@@ -57,10 +52,41 @@ const APPS = [
   //   tags: ["Winアプリ", "生産性"],
   //   status: "開発中",
   //   icon: "image",
+  //   image: "assets/screenshot-sorter.png",  // ← スクショを assets/ に置いてパスを書く
   //   links: [
   //     { label: "GitHub", url: "https://github.com/RYUIYAMADA/screenshot-sorter" }
   //   ]
   // },
+];
+
+/* =====================================================
+ * おすすめツール（他者製・拡張機能・アプリ）
+ * サンプル。RECOMMENDED に追記/差し替えてください。
+ * スキーマ: { name, category, description, url }
+ * category 例: "Chrome拡張機能" / "Macアプリ" / "Winアプリ" / "Webサービス"
+ * ===================================================== */
+const RECOMMENDED = [
+  // サンプル。RECOMMENDED に追記/差し替えてください。
+  {
+    name: "Notion Web Clipper",
+    category: "Chrome拡張機能",
+    description: "閲覧中のWebページをワンクリックでNotionのデータベースへ保存。後で読む記事や参考サイトの収集に。",
+    url: "https://chrome.google.com/webstore/detail/notion-web-clipper/knheggckgoiihginacbkhaalnibhilkk"
+  },
+  // サンプル。RECOMMENDED に追記/差し替えてください。
+  {
+    name: "Raycast",
+    category: "Macアプリ",
+    description: "macOS向けランチャー。アプリ起動・検索・クリップボード履歴・カレンダー確認がキーボードだけで完結する。",
+    url: "https://www.raycast.com"
+  },
+  // サンプル。RECOMMENDED に追記/差し替えてください。
+  {
+    name: "uBlock Origin",
+    category: "Chrome拡張機能",
+    description: "オープンソースの広告・トラッカーブロッカー。ページ読み込みが速くなり、余計な広告が消える。",
+    url: "https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm"
+  },
 ];
 
 /* =====================================================
@@ -131,14 +157,58 @@ const ICONS = {
 };
 
 /* =====================================================
- * 描画ロジック
+ * おすすめカテゴリ別アイコン
+ * ===================================================== */
+const REC_CATEGORY_ICONS = {
+  "Chrome拡張機能": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="12" cy="12" r="4"/>
+    <line x1="21.17" y1="8" x2="12" y2="8"/>
+    <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
+    <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
+  </svg>`,
+  "Macアプリ": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2"/>
+    <line x1="8" y1="21" x2="16" y2="21"/>
+    <line x1="12" y1="17" x2="12" y2="21"/>
+  </svg>`,
+  "Winアプリ": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 5.5L10.5 4.5V11.5H3V5.5Z"/>
+    <path d="M11.5 4.35L21 3V11.5H11.5V4.35Z"/>
+    <path d="M3 12.5H10.5V19.5L3 18.5V12.5Z"/>
+    <path d="M11.5 12.5H21V21L11.5 19.65V12.5Z"/>
+  </svg>`,
+  "Webサービス": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="2" y1="12" x2="22" y2="12"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+  </svg>`,
+};
+
+const REC_ICON_DEFAULT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="3" width="7" height="7" rx="1"/>
+  <rect x="14" y="3" width="7" height="7" rx="1"/>
+  <rect x="3" y="14" width="7" height="7" rx="1"/>
+  <rect x="14" y="14" width="7" height="7" rx="1"/>
+</svg>`;
+
+/* =====================================================
+ * プレースホルダSVG（16:9枠・画像なし時）
+ * ===================================================== */
+const PLACEHOLDER_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="3" width="18" height="18" rx="2"/>
+  <circle cx="8.5" cy="8.5" r="1.5"/>
+  <polyline points="21 15 16 10 5 21"/>
+</svg>`;
+
+/* =====================================================
+ * 描画ロジック（自作ツール）
  * ===================================================== */
 
 let currentTag = 'all';
 
 /**
  * タグの重複排除集計
- * { tag: count } の形で返す
  */
 function collectTags(apps) {
   const map = {};
@@ -152,6 +222,7 @@ function collectTags(apps) {
 
 /**
  * フィルタチップを生成して .filter-bar に挿入
+ * ※ 自作ツールセクションのみに作用する
  */
 function buildFilterBar(apps) {
   const bar = document.getElementById('filterBar');
@@ -164,7 +235,7 @@ function buildFilterBar(apps) {
   allChip.classList.add('active');
   bar.appendChild(allChip);
 
-  // タグ別チップ（登場順に重複なし）
+  // タグ別チップ（件数降順）
   Object.entries(tagMap)
     .sort((a, b) => b[1] - a[1])
     .forEach(([tag, count]) => {
@@ -187,30 +258,27 @@ function buildChip(label, count, tag) {
 
   btn.appendChild(labelSpan);
   btn.appendChild(countSpan);
-
   btn.addEventListener('click', () => onChipClick(tag));
   return btn;
 }
 
 /**
- * チップクリック時の処理
+ * チップクリック時の処理（自作セクションのみに作用）
  */
 function onChipClick(tag) {
   currentTag = tag;
 
-  // チップのactive切替
   document.querySelectorAll('.filter-chip').forEach(chip => {
     const active = chip.dataset.tag === tag;
     chip.classList.toggle('active', active);
     chip.setAttribute('aria-pressed', String(active));
   });
 
-  // カード表示フィルタ
   renderCards(APPS);
 }
 
 /**
- * カードを描画（フィルタ適用済み）
+ * 自作カードを描画（フィルタ適用済み）
  */
 function renderCards(apps) {
   const grid = document.getElementById('cardsGrid');
@@ -221,17 +289,13 @@ function renderCards(apps) {
     ? apps
     : apps.filter(app => (app.tags || []).includes(currentTag));
 
-  // カードを再描画
-  // 既存カードをフィルタ表示（再生成より軽量）
+  // 初回のみ全カード生成
   const existing = grid.querySelectorAll('.app-card');
   if (existing.length === 0) {
-    // 初回: 全カード生成
-    apps.forEach(app => {
-      grid.appendChild(buildCard(app));
-    });
+    apps.forEach(app => grid.appendChild(buildCard(app)));
   }
 
-  // 全カードに対して表示/非表示
+  // 表示/非表示切替
   grid.querySelectorAll('.app-card').forEach(card => {
     const appName = card.dataset.appName;
     const app = apps.find(a => a.name === appName);
@@ -240,20 +304,43 @@ function renderCards(apps) {
     card.style.display = match ? '' : 'none';
   });
 
-  // 0件表示
-  const visibleCount = filtered.length;
-  empty.classList.toggle('visible', visibleCount === 0);
+  empty.classList.toggle('visible', filtered.length === 0);
 }
 
 /**
- * 1枚のカードDOM生成
+ * 1枚の自作ツールカードDOM生成
  */
 function buildCard(app) {
   const card = document.createElement('article');
   card.className = 'app-card';
   card.dataset.appName = app.name;
+  card.setAttribute('role', 'listitem');
 
-  // ── ヘッダー（アイコン + ステータス）
+  // ── 画像エリア（16:9 統一）
+  const imageWrap = document.createElement('div');
+  imageWrap.className = 'card-image-wrap';
+
+  if (app.image) {
+    const img = document.createElement('img');
+    img.src = app.image;
+    img.alt = `${app.name} のスクリーンショット`;
+    img.loading = 'lazy';
+    // 読み込みエラー時はプレースホルダにフォールバック
+    img.onerror = function() {
+      imageWrap.innerHTML = '';
+      imageWrap.appendChild(buildImagePlaceholder());
+    };
+    imageWrap.appendChild(img);
+  } else {
+    imageWrap.appendChild(buildImagePlaceholder());
+  }
+  card.appendChild(imageWrap);
+
+  // ── カード本文エリア
+  const body = document.createElement('div');
+  body.className = 'card-body';
+
+  // ヘッダー（アイコン + ステータス）
   const header = document.createElement('div');
   header.className = 'card-header';
 
@@ -265,27 +352,27 @@ function buildCard(app) {
 
   header.appendChild(iconBox);
   header.appendChild(badge);
-  card.appendChild(header);
+  body.appendChild(header);
 
-  // ── アプリ名
+  // アプリ名
   const name = document.createElement('h3');
   name.className = 'card-name';
   name.textContent = app.name;
-  card.appendChild(name);
+  body.appendChild(name);
 
-  // ── tagline
+  // tagline
   const tagline = document.createElement('p');
   tagline.className = 'card-tagline';
   tagline.textContent = app.tagline || '';
-  card.appendChild(tagline);
+  body.appendChild(tagline);
 
-  // ── 説明文
+  // 説明文
   const desc = document.createElement('p');
   desc.className = 'card-description';
   desc.textContent = app.description || '';
-  card.appendChild(desc);
+  body.appendChild(desc);
 
-  // ── タグバッジ
+  // タグバッジ
   if ((app.tags || []).length > 0) {
     const tagsDiv = document.createElement('div');
     tagsDiv.className = 'card-tags';
@@ -295,20 +382,33 @@ function buildCard(app) {
       span.textContent = t;
       tagsDiv.appendChild(span);
     });
-    card.appendChild(tagsDiv);
+    body.appendChild(tagsDiv);
   }
 
-  // ── リンクボタン
+  // リンクボタン
   if ((app.links || []).length > 0) {
     const linksDiv = document.createElement('div');
     linksDiv.className = 'card-links';
-    app.links.forEach(link => {
-      linksDiv.appendChild(buildLinkButton(link));
-    });
-    card.appendChild(linksDiv);
+    app.links.forEach(link => linksDiv.appendChild(buildLinkButton(link)));
+    body.appendChild(linksDiv);
   }
 
+  card.appendChild(body);
   return card;
+}
+
+/**
+ * 画像プレースホルダDOM生成
+ */
+function buildImagePlaceholder() {
+  const ph = document.createElement('div');
+  ph.className = 'card-image-placeholder';
+  ph.setAttribute('aria-hidden', 'true');
+  ph.innerHTML = PLACEHOLDER_SVG;
+  const label = document.createElement('span');
+  label.textContent = '画像準備中';
+  ph.appendChild(label);
+  return ph;
 }
 
 /**
@@ -319,7 +419,6 @@ function buildStatusBadge(status) {
   const isLive = status === '公開中';
   badge.className = `status-badge ${isLive ? 'live' : 'wip'}`;
 
-  // 線アイコン付き
   if (isLive) {
     badge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
   } else {
@@ -329,7 +428,6 @@ function buildStatusBadge(status) {
   const text = document.createElement('span');
   text.textContent = status || '開発中';
   badge.appendChild(text);
-
   return badge;
 }
 
@@ -343,14 +441,12 @@ function buildLinkButton(link) {
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
 
-  // ラベルに応じたアイコンを選択
   const iconSvg = getLinkIcon(link.label);
   a.innerHTML = iconSvg;
 
   const span = document.createElement('span');
   span.textContent = link.label;
   a.appendChild(span);
-
   return a;
 }
 
@@ -364,7 +460,6 @@ function getLinkIcon(label) {
       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
     </svg>`;
   }
-  // 紹介ページ・URLなど
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
     <polyline points="15 3 21 3 21 9"/>
@@ -373,9 +468,77 @@ function getLinkIcon(label) {
 }
 
 /* =====================================================
+ * おすすめツール描画ロジック（自作フィルタと独立）
+ * ===================================================== */
+
+/**
+ * おすすめカードを描画
+ */
+function renderRecommended(items) {
+  const grid = document.getElementById('recGrid');
+  if (!grid) return;
+
+  items.forEach(item => grid.appendChild(buildRecCard(item)));
+}
+
+/**
+ * 1枚のおすすめカードDOM生成
+ */
+function buildRecCard(item) {
+  const card = document.createElement('article');
+  card.className = 'rec-card';
+
+  // ヘッダー（アイコン＋名前＋カテゴリバッジ）
+  const header = document.createElement('div');
+  header.className = 'rec-card-header';
+
+  const iconBox = document.createElement('div');
+  iconBox.className = 'rec-icon-box';
+  iconBox.innerHTML = REC_CATEGORY_ICONS[item.category] || REC_ICON_DEFAULT;
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'rec-name';
+  nameEl.textContent = item.name;
+
+  const catBadge = document.createElement('span');
+  catBadge.className = 'rec-category-badge';
+  catBadge.textContent = item.category || '';
+
+  header.appendChild(iconBox);
+  header.appendChild(nameEl);
+  header.appendChild(catBadge);
+  card.appendChild(header);
+
+  // 説明文
+  const desc = document.createElement('p');
+  desc.className = 'rec-description';
+  desc.textContent = item.description || '';
+  card.appendChild(desc);
+
+  // 「開く」リンク
+  const link = document.createElement('a');
+  link.className = 'rec-link';
+  link.href = item.url || '#';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+    <polyline points="15 3 21 3 21 9"/>
+    <line x1="10" y1="14" x2="21" y2="3"/>
+  </svg>`;
+  const linkLabel = document.createElement('span');
+  linkLabel.textContent = '開く';
+  link.appendChild(linkLabel);
+  card.appendChild(link);
+
+  return card;
+}
+
+/* =====================================================
  * 初期化
  * ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   buildFilterBar(APPS);
   renderCards(APPS);
+  renderRecommended(RECOMMENDED);
 });
