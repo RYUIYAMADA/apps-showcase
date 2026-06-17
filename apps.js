@@ -57,6 +57,20 @@ const APPS = [
     ]
   },
 
+  {
+    name: "Klip",
+    tagline: "コピーするたび履歴が溜まる。⌘⇧Vで呼び出してすぐ貼れる",
+    description: "macOS常駐のクリップボード履歴マネージャー。コピー履歴をホットキーで横スクロールカード表示し、用途別ボード保存も可能。画像OCR検索やチーム共有機能も備える。",
+    tags: ["Macアプリ"],
+    status: "公開中",
+    icon: "clipboard",
+    image: "assets/klip-showcase-default.png",
+    links: [
+      { label: "紹介・導入", url: "https://ryuiyamada.github.io/klip/", primary: true },
+      { label: "GitHub", url: "https://github.com/RYUIYAMADA/klip" }
+    ]
+  },
+
   // ── 追加テンプレート（コメントアウト済み）──────────
   // 新しいアプリを追加するときは、下の例を参考にコピーして追記してください。
   //
@@ -86,6 +100,7 @@ const RECOMMENDED = [
     name: "Easy Scraper",
     category: "Chrome拡張機能",
     description: "ウェブページ上の要素をワンクリックで指定するだけでデータ抽出できるノーコードスクレイピングツール。プログラミング不要・無料で、視覚的な操作で表やリストを取得できる。",
+    image: "assets/recommend/easy-scraper.svg",
     url: "https://easyscraper.com/"
   },
   {
@@ -99,6 +114,19 @@ const RECOMMENDED = [
     category: "Chrome拡張機能",
     description: "Gmailのスレッドを新しい順に並べ替え、返信ボタンをメール先頭に移動させる拡張機能。長いスレッドでも最新メールがすぐ確認・返信でき、スクロール手間がゼロになる。",
     url: "https://chrome.google.com/webstore/detail/gmail-reverse-conversatio/kfgepjmmgamniaefbjlbacahkjjnjoaa?hl=ja&gl=JP"
+  },
+  {
+    name: "uAutoPagerize",
+    category: "Chrome拡張機能",
+    description: "スクロールが末尾に近づくと次のページを自動で継ぎ足し読み込みする拡張機能。検索結果やブログ一覧で「次へ」ボタンを押す手間がなくなり、ページ送りをほぼ意識せずに閲覧できる。",
+    url: "https://chromewebstore.google.com/detail/fihlokiapgolfkdkbhkdiondbpfhkdpb"
+  },
+  {
+    name: "Keepa - Amazon Price Tracker",
+    category: "Chrome拡張機能",
+    description: "Amazonの商品ページに価格履歴グラフを自動表示し、希望価格を設定すると値下がり時にメール通知する拡張機能。最安値・平均価格を一目で確認でき、タイムセールに惑わされずに適正価格で購入できる。",
+    image: "assets/recommend/keepa.png",
+    url: "https://chromewebstore.google.com/detail/keepa-amazon-price-tracke/neebplgakaahbhdphmkckjjcegoiijjo"
   },
 ];
 
@@ -164,6 +192,13 @@ const ICONS = {
   sidebar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="2"/>
     <line x1="16" y1="3" x2="16" y2="21"/>
+  </svg>`,
+
+  clipboard: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="8" y="2" width="8" height="4" rx="1"/>
+    <rect x="4" y="4" width="16" height="17" rx="2"/>
+    <line x1="4" y1="9" x2="20" y2="9"/>
+    <path d="M8 2 Q8 6 8 6 L16 6 Q16 6 16 2"/>
   </svg>`,
 
   default: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -549,7 +584,20 @@ function buildRecCard(item) {
 
   const iconBox = document.createElement('div');
   iconBox.className = 'rec-icon-box';
-  iconBox.innerHTML = REC_CATEGORY_ICONS[item.category] || REC_ICON_DEFAULT;
+  if (item.image) {
+    const fallbackSvg = REC_CATEGORY_ICONS[item.category] || REC_ICON_DEFAULT;
+    const thumb = document.createElement('img');
+    thumb.className = 'rec-thumb';
+    thumb.src = item.image;
+    thumb.alt = item.name;
+    thumb.addEventListener('error', () => {
+      iconBox.removeChild(thumb);
+      iconBox.innerHTML = fallbackSvg;
+    });
+    iconBox.appendChild(thumb);
+  } else {
+    iconBox.innerHTML = REC_CATEGORY_ICONS[item.category] || REC_ICON_DEFAULT;
+  }
 
   const nameEl = document.createElement('div');
   nameEl.className = 'rec-name';
