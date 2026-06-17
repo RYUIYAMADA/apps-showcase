@@ -42,6 +42,20 @@ const APPS = [
     ]
   },
 
+  {
+    name: "タスクバー",
+    tagline: "画面の右端にタッチ。今日の予定とタスクが現れる",
+    description: "Mac画面の右端にマウスを当てるとサイドバーがスライド表示。Googleカレンダーの予定と今日のタスクが一目で分かる常駐アプリ。Windows版は開発予定。",
+    tags: ["Macアプリ"],
+    status: "公開中",
+    icon: "sidebar",
+    image: "",
+    links: [
+      { label: "紹介・導入", url: "https://ryuiyamada.github.io/task-sidebar/", primary: true },
+      { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
+    ]
+  },
+
   // ── 追加テンプレート（コメントアウト済み）──────────
   // 新しいアプリを追加するときは、下の例を参考にコピーして追記してください。
   //
@@ -146,6 +160,11 @@ const ICONS = {
   terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <polyline points="4 17 10 11 4 5"/>
     <line x1="12" y1="19" x2="20" y2="19"/>
+  </svg>`,
+
+  sidebar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <line x1="16" y1="3" x2="16" y2="21"/>
   </svg>`,
 
   default: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -320,6 +339,21 @@ function buildCard(app) {
   const imageWrap = document.createElement('div');
   imageWrap.className = 'card-image-wrap';
 
+  // ウィンドウ風トップバー（信号機ドット3つ）
+  const winBar = document.createElement('div');
+  winBar.className = 'card-win-bar';
+  winBar.setAttribute('aria-hidden', 'true');
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'card-win-bar-dot';
+    winBar.appendChild(dot);
+  }
+  imageWrap.appendChild(winBar);
+
+  // 画像ステージ（淡色地＋余白でスクショが浮いて見える）
+  const stage = document.createElement('div');
+  stage.className = 'card-image-stage';
+
   if (app.image) {
     const img = document.createElement('img');
     img.src = app.image;
@@ -327,13 +361,14 @@ function buildCard(app) {
     img.loading = 'lazy';
     // 読み込みエラー時はプレースホルダにフォールバック
     img.onerror = function() {
-      imageWrap.innerHTML = '';
-      imageWrap.appendChild(buildImagePlaceholder());
+      stage.innerHTML = '';
+      stage.appendChild(buildImagePlaceholder());
     };
-    imageWrap.appendChild(img);
+    stage.appendChild(img);
   } else {
-    imageWrap.appendChild(buildImagePlaceholder());
+    stage.appendChild(buildImagePlaceholder());
   }
+  imageWrap.appendChild(stage);
   card.appendChild(imageWrap);
 
   // ── カード本文エリア
