@@ -37,8 +37,8 @@ const APPS = [
     image: "assets/yotei-tsuika.png",
     links: [
       { label: "紹介ページ", url: "https://ryuiyamada.github.io/quick-calendar/", primary: true },
-      { label: "導入手順", url: "https://github.com/RYUIYAMADA/yotei-tsuika#readme" },
-      { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
+      { label: "導入手順", url: "https://github.com/RYUIYAMADA/quick-calendar#readme" },
+      { label: "GitHub", url: "https://github.com/RYUIYAMADA/quick-calendar" }
     ]
   },
 
