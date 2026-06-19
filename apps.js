@@ -52,8 +52,8 @@ const APPS = [
     image: "assets/taskbar-card.png",
     imageFull: true,
     links: [
-      { label: "紹介・導入", url: "https://ryuiyamada.github.io/task-sidebar/", primary: true },
-      { label: "GitHub", url: "https://github.com/RYUIYAMADA/yotei-tsuika" }
+      { label: "紹介・導入", url: "https://ryuiyamada.github.io/edgebar/", primary: true },
+      { label: "GitHub", url: "https://github.com/RYUIYAMADA/edgebar" }
     ]
   },
 
