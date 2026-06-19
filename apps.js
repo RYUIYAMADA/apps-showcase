@@ -28,7 +28,7 @@
 const APPS = [
   // ── 実データ ──────────────────────────────────────
   {
-    name: "予定追加ツール",
+    name: "Quick Calendar",
     tagline: "選択してワンクリックでカレンダー登録",
     description: "メール・Slack・LINEの文章を選ぶだけ。AIが日時・場所を自動解析し、Googleカレンダーに即登録。コピペも手打ちも不要。",
     tags: ["Chrome拡張機能", "macアプリ"],
@@ -43,7 +43,7 @@ const APPS = [
   },
 
   {
-    name: "タスクバー",
+    name: "task-bar",
     tagline: "画面の右端にタッチ。今日の予定とタスクが現れる",
     description: "Mac画面の右端にマウスを当てるとサイドバーがスライド表示。Googleカレンダーの予定と今日のタスクが一目で分かる常駐アプリ。Windows版は開発予定。",
     tags: ["Macアプリ"],

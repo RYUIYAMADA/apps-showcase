@@ -24,7 +24,7 @@ apps-showcase/
 ```js
 const APPS = [
   {
-    name: "予定追加ツール",
+    name: "Quick Calendar",
     ...
   },
   // ← ここに追記する（上のエントリの最後の } の後にカンマを付けて追加）
@@ -36,7 +36,7 @@ const APPS = [
 ```js
 const APPS = [
   {
-    name: "予定追加ツール",
+    name: "Quick Calendar",
     tagline: "選択してワンクリックでカレンダー登録",
     description: "...",
     tags: ["Chrome拡張機能", "macアプリ"],
