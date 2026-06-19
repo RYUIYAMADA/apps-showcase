@@ -43,7 +43,7 @@ const APPS = [
   },
 
   {
-    name: "task-bar",
+    name: "EdgeBar",
     tagline: "画面の右端にタッチ。今日の予定とタスクが現れる",
     description: "Mac画面の右端にマウスを当てるとサイドバーがスライド表示。Googleカレンダーの予定と今日のタスクが一目で分かる常駐アプリ。Windows版は開発予定。",
     tags: ["Macアプリ"],
